@@ -37,7 +37,7 @@ module NmgUserTracking
     end
     # Set the source based on the stored cookie.
     def set_source_from_cookie
-      self.current_source = cookies[:ac_source] unless cookies[:ac_source].blank? || session[:source] == cookies[:ac_source]
+      self.current_source = cookies[:nmg_source] unless cookies[:nmg_source].blank? || session[:source] == cookies[:nmg_source]
     end
     # Set the source based on the original orgin.
     def set_source_from_orgin
