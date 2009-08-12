@@ -4,7 +4,7 @@ module NmgUserTracking
 
     # Inclusion hook to make methods available as ActionView helper methods.
     def self.included(base)
-      base.send :helper_method, :current_source, :current_affiliate_id, :original_origin
+      base.send :helper_method, :current_source, :current_affiliate_id, :original_origin, :landing_page
     end
 
 
@@ -92,7 +92,7 @@ module NmgUserTracking
 
 
     #
-    # Orgin
+    # Origin
     #
 
     # Accesses the original origin from the session.
@@ -115,11 +115,40 @@ module NmgUserTracking
     end
     # Set the origin based on the referring url.
     def set_origin_from_referer
-      self.original_origin = request.env['HTTP_REFERER'] unless request.env['HTTP_REFERER'].blank?
+      # self.original_origin = request.env['HTTP_REFERER'] unless request.env['HTTP_REFERER'].blank?
+      self.original_origin = request.referer unless request.referer.blank?
     end
     # Set the source to this defaulted value.
     def set_origin_from_default
       self.original_origin = ''
+    end
+
+
+    #
+    # Landing Page
+    #
+
+    # Accesses the landing page from the session.
+    def landing_page
+      @landing_page ||= set_landing_page unless @landing_page == false
+    end
+    # Store the given landing page in the session.
+    def landing_page=(value)
+      session[:landing_page] = value
+      @landing_page = value || false
+    end
+
+    # Set the landing page from methods in this order
+    def set_landing_page
+      set_landing_page_from_session || set_landing_page_from_current
+    end
+    # Set the landing page based on the stored session.
+    def set_landing_page_from_session
+      self.landing_page = session[:landing_page] unless session[:landing_page].nil?
+    end
+    # Set the landing page based on the current url.
+    def set_landing_page_from_current
+      self.landing_page = request.request_uri
     end
 
 end
