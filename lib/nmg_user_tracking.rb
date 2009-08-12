@@ -4,7 +4,7 @@ module NmgUserTracking
 
     # Inclusion hook to make methods available as ActionView helper methods.
     def self.included(base)
-      base.send :helper_method, :current_source, :current_affiliate_id, :original_orgin
+      base.send :helper_method, :current_source, :current_affiliate_id, :original_origin
     end
 
 
@@ -25,7 +25,7 @@ module NmgUserTracking
 
     # Set the source from methods in this order
     def set_source
-      set_source_from_params || set_source_from_session || set_source_from_cookie || set_source_from_orgin || set_source_from_default
+      set_source_from_params || set_source_from_session || set_source_from_cookie || set_source_from_origin || set_source_from_default
     end
     # Set the source based on a params variable.
     def set_source_from_params
@@ -39,9 +39,9 @@ module NmgUserTracking
     def set_source_from_cookie
       self.current_source = cookies[:nmg_source] unless cookies[:nmg_source].blank? || session[:source] == cookies[:nmg_source]
     end
-    # Set the source based on the original orgin.
-    def set_source_from_orgin
-      self.current_source = 'seo' unless self.original_orgin.blank?
+    # Set the source based on the original origin.
+    def set_source_from_origin
+      self.current_source = 'seo' unless self.original_origin.blank?
     end
     # # Set the source based on the referring url.
     # def set_source_from_referer
@@ -95,31 +95,31 @@ module NmgUserTracking
     # Orgin
     #
 
-    # Accesses the original orgin from the session.
-    def original_orgin
-      @original_orgin ||= set_orgin unless @original_orgin == false
+    # Accesses the original origin from the session.
+    def original_origin
+      @original_origin ||= set_origin unless @original_origin == false
     end
-    # Store the given orgin in the session.
-    def original_orgin=(value)
-      session[:original_orgin] = value
-      @original_orgin = value || false
+    # Store the given origin in the session.
+    def original_origin=(value)
+      session[:original_origin] = value
+      @original_origin = value || false
     end
 
-    # Set the orgin from methods in this order
-    def set_orgin
-      set_orgin_from_session || set_orgin_from_referer || set_orgin_from_default
+    # Set the origin from methods in this order
+    def set_origin
+      set_origin_from_session || set_origin_from_referer || set_origin_from_default
     end
-    # Set the orgin based on the stored session.
-    def set_orgin_from_session
-      self.original_orgin = session[:original_orgin] unless session[:original_orgin].nil?
+    # Set the origin based on the stored session.
+    def set_origin_from_session
+      self.original_origin = session[:original_origin] unless session[:original_origin].nil?
     end
-    # Set the orgin based on the referring url.
-    def set_orgin_from_referer
-      self.original_orgin = request.env['HTTP_REFERER'] unless request.env['HTTP_REFERER'].blank?
+    # Set the origin based on the referring url.
+    def set_origin_from_referer
+      self.original_origin = request.env['HTTP_REFERER'] unless request.env['HTTP_REFERER'].blank?
     end
     # Set the source to this defaulted value.
-    def set_orgin_from_default
-      self.original_orgin = ''
+    def set_origin_from_default
+      self.original_origin = ''
     end
 
 end
