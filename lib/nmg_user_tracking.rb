@@ -148,7 +148,7 @@ module NmgUserTracking
     end
     # Set the landing page based on the current url.
     def set_landing_page_from_current
-      self.landing_page = request.request_uri
+      self.landing_page = request.fullpath
     end
 
 end
