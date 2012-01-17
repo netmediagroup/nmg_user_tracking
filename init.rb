@@ -1,1 +1,0 @@
-require 'nmg_user_tracking'
