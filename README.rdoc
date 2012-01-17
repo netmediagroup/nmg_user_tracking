@@ -1,3 +1,28 @@
-= NMGUserTracking
+= NmgUserTracking
 
-This project rocks and uses MIT-LICENSE.
+This project is intended to expand a controller to include user tracking methods (the way that Net Media Group uses them) with accompanying view helper methods.
+
+== Install
+
+=== Controller Example
+Just include the module in the desired controller, usually ApplicationController.
+  class ApplicationController < ActionController::Base
+    ...
+    include NmgUserTracking
+    ...
+  end
+
+
+== Usage
+
+=== Controller Example
+Set up filters to automatically use methods.
+  class ApplicationController < ActionController::Base
+    ...
+    before_filter :set_source
+    ...
+  end
+
+=== View Example
+View helper methods are defined to access the user tracking.
+  <%= current_source %>
