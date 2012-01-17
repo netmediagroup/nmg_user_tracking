@@ -5,7 +5,7 @@ require "nmg_user_tracking/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "NmgUserTracking"
+  s.name        = "nmg_user_tracking"
   s.version     = NmgUserTracking::VERSION
   s.authors     = ["Jared Howard"]
   s.email       = ["jhoward@netmediagroup.com"]
