@@ -41,7 +41,7 @@ module NmgUserTracking
   end
   # Set the source based on the original origin.
   def set_source_from_origin
-    self.current_source = 'seo' unless self.original_origin.blank?
+    self.current_source = 'seo' if self.original_origin.present? && !self.original_origin.include?(request.host)
   end
   # # Set the source based on the referring url.
   # def set_source_from_referer
