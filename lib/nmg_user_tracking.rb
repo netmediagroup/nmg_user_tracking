@@ -77,6 +77,8 @@ module NmgUserTracking
     if !params[:a_aid].blank?
       self.current_affiliate_id = params[:a_aid]
       session[:moolamoola_affiliate] = true
+    elsif !params[:affiliate_id].blank?
+      self.current_affiliate_id = params[:affiliate_id]
     elsif !params[:aff_id].blank?
       self.current_affiliate_id = params[:aff_id]
     end
